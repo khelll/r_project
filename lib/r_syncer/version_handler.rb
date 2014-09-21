@@ -1,4 +1,5 @@
 module RSyncer
+  # Fetchs the version info and indexes them if not available.
   class VersionHandler
     attr_accessor :attributes, :version_gateway, :package_version_mapper
 

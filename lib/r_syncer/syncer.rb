@@ -1,4 +1,5 @@
 module RSyncer
+  # Syning happens here
   class Syncer
     def self.perform(options = {})
       new(options).perform

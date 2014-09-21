@@ -1,6 +1,9 @@
 require 'dcf'
 
 module RSyncer
+  # Graps the available packages/versions info from a web service
+  # Based on Gateway design pattern
+  # @see http://martinfowler.com/eaaCatalog/gateway.html
   class VersionGateway
     class << self
       def versions_url

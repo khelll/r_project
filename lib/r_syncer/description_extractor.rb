@@ -2,6 +2,7 @@ require 'rubygems/package'
 require 'zlib'
 
 module RSyncer
+  # Extracts the version description from a .tar.gz file.
   class DescriptionExtractor
     attr_accessor :data
 

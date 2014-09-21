@@ -1,6 +1,7 @@
-require 'dcf'
-
 module RSyncer
+  # A Mapper from VersionGateway domain model to PackageVersion
+  # Based on Mapper design pattern
+  # @see http://martinfowler.com/eaaCatalog/mapper.html
   class PackageVersionMapper
     attr_accessor :attributes
 
