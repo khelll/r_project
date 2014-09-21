@@ -1,0 +1,3 @@
+    <h1>Package <%=@package.name%></h1>
+    <%= render partial: "package_versions/version",collection: @package.versions %>
+    <%= link_to 'Home', root_path %>

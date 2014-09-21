@@ -1,0 +1,5 @@
+Package: ABCp2
+Version: 1.1
+Depends: MASS
+License: GPL-2
+NeedsCompilation: no
