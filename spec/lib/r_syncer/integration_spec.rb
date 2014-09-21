@@ -18,8 +18,15 @@ module RSyncer
             2.times { FactoryGirl.create(:package_version) }
             syncer.perform
           end
-          subject(:package_version) { PackageVersion.last }
-          it { is_expected.to be_a_version(ver_desc) }
+
+          it 'adds the record' do
+            expect(PackageVersion.count).to eq(3)
+          end
+
+          it 'has the correct version data' do
+            expect(PackageVersion.last).to be_a_version(ver_desc)
+          end
+
         end
 
         context 'previous versions of the same package exists' do
@@ -35,8 +42,17 @@ module RSyncer
             syncer.perform
           end
 
-          subject(:package_version) { PackageVersion.last }
-          it { is_expected.to be_a_version(ver_desc) }
+          it 'adds the record' do
+            expect(PackageVersion.count).to eq(3)
+          end
+
+          it 'has the correct version data' do
+            expect(PackageVersion.last).to be_a_version(ver_desc)
+          end
+
+          it 'marks the newer version as the latest' do
+            expect(PackageVersion.last.latest?).to eq(true)
+          end
 
           it 'unmarks older versions from being the latest' do
             version = PackageVersion
