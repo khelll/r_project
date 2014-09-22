@@ -3,7 +3,7 @@ require 'rails_helper'
 module RSyncer
   describe Syncer do
     describe '#perform' do
-      let(:ver_desc) { version_description('ver_desc.txt') }
+      let(:description) { version_description('ver_desc.txt') }
       let(:syncer) { described_class.new }
       before do
         stub_request(:get, VersionGateway.versions_url)
@@ -24,7 +24,7 @@ module RSyncer
           end
 
           it 'has the correct version data' do
-            expect(PackageVersion.last).to be_a_version(ver_desc)
+            expect(PackageVersion.last).to be_a_version(description)
           end
 
         end
@@ -47,11 +47,11 @@ module RSyncer
           end
 
           it 'has the correct version data' do
-            expect(PackageVersion.last).to be_a_version(ver_desc)
+            expect(PackageVersion.last).to be_a_version(description)
           end
 
           it 'marks the newer version as the latest' do
-            expect(PackageVersion.last.latest?).to eq(true)
+            expect(PackageVersion.last).to be_latest
           end
 
           it 'unmarks older versions from being the latest' do

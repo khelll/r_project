@@ -19,21 +19,21 @@ module RSyncer
     describe '#version' do
       let(:name) { 'ABCp2' }
       let(:ver) { '1.1' }
-      let(:ver_desc) { version_description('ver_desc.txt') }
+      let(:description) { version_description('ver_desc.txt') }
       let(:version) { described_class.version(name, ver) }
       before do
         stub_request(:get, described_class.version_url(name, ver))
         .to_return(body: fixture_content('ABCp2_1.1.tar.gz'))
       end
       it 'returns a list of parsed values' do
-        expect(version['Package']).to eq(ver_desc.fetch('Package'))
-        expect(version['Version']).to eq(ver_desc.fetch('Version'))
-        expect(version['Title']).to eq(ver_desc.fetch('Title'))
-        expect(version['Description']).to eq(ver_desc.fetch('Description'))
-        expect(version['Author']).to eq(ver_desc.fetch('Author'))
-        expect(version['Maintainer']).to eq(ver_desc.fetch('Maintainer'))
+        expect(version['Package']).to eq(description.fetch('Package'))
+        expect(version['Version']).to eq(description.fetch('Version'))
+        expect(version['Title']).to eq(description.fetch('Title'))
+        expect(version['Description']).to eq(description.fetch('Description'))
+        expect(version['Author']).to eq(description.fetch('Author'))
+        expect(version['Maintainer']).to eq(description.fetch('Maintainer'))
         expect(version['Date/Publication'].to_s)
-        .to eq(ver_desc.fetch('Date/Publication'))
+        .to eq(description.fetch('Date/Publication'))
       end
     end
   end

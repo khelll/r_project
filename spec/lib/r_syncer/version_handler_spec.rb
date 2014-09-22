@@ -4,13 +4,13 @@ module RSyncer
   describe VersionHandler do
     describe '#perform' do
       let(:data) { fixture_content('ABCp2_1.1.tar.gz') }
-      let(:ver_desc) { version_description('ver_desc.txt') }
-      let(:version_gateway) { double(version: ver_desc) }
+      let(:description) { version_description('ver_desc.txt') }
+      let(:version_gateway) { double(version: description) }
       let(:tmp_package_version) { FactoryGirl.build(:tmp_package_version) }
       let(:package_version_mapper) { double(perform: tmp_package_version) }
       let(:handler) do
         VersionHandler.new(
-          ver_desc, version_gateway: version_gateway,
+          description, version_gateway: version_gateway,
           package_version_mapper: package_version_mapper
         )
       end
@@ -32,7 +32,7 @@ module RSyncer
         it 'creates a package version formed by a mapper' do
           handler.perform
           expect(package_version_mapper)
-          .to have_received(:perform).with(ver_desc)
+          .to have_received(:perform).with(description)
           expect(PackageVersion.last).to eq(tmp_package_version)
         end
       end
