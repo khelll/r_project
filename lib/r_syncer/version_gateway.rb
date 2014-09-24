@@ -10,8 +10,8 @@ module RSyncer
         @versions_url ||= 'http://cran.r-project.org/src/contrib/PACKAGES'
       end
 
-      def version_url(name, version)
-        "http://cran.r-project.org/src/contrib/#{name}_#{version}.tar.gz"
+      def version_url(package, version)
+        "http://cran.r-project.org/src/contrib/#{package}_#{version}.tar.gz"
       end
 
       def list(max_fetch = :all)
@@ -20,8 +20,8 @@ module RSyncer
         Dcf.parse(limited_data)
       end
 
-      def version(name, version)
-        url = version_url(name, version)
+      def version(package, version)
+        url = version_url(package, version)
         file_data = HTTP.get(url).to_s
         description = RSyncer::DescriptionExtractor.perform(file_data)
         Dcf.parse(description).first
