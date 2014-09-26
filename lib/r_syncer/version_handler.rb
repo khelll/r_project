@@ -16,9 +16,8 @@ module RSyncer
     end
 
     def perform
-      return if version_exists? || !package_version.valid?
-      clear_package_latest_versions
-      package_version.save
+      return if version_exists?
+      package_version.release!
     rescue => e
       p e
     end
@@ -32,15 +31,11 @@ module RSyncer
     end
 
     def package_version
-      @package_version ||= package_version_mapper.perform(gateway_info)
+      package_version_mapper.perform(gateway_info)
     end
 
     def gateway_info
       version_gateway.version(package, version)
-    end
-
-    def clear_package_latest_versions
-      PackageVersion.clear_package_latest_versions(package)
     end
   end
 end

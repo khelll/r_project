@@ -15,7 +15,10 @@ FactoryGirl.define do
     published_at Time.now
     name 'ABCp2'
     title 'Approximate Bayesian Computational model for estimating P2'
-    description 'This package tests the goodness of fit of a distribution of offspring to the Normal, Poisson, and Gamma distribution and estimates the proportional paternity of the second male (P2) based on the best fit distribution.'
+    description 'This package tests the goodness of fit of a distribution of ' \
+      'offspring to the Normal, Poisson, and Gamma distribution and ' \
+      'estimates the proportional paternity of the second male (P2) based ' \
+      'on the best fit distribution.'
     authors 'M. Catherine Duryea, Andrew D. Kern, Robert M. Cox, and Ryan '
     maintainers 'M. Catherine Duryea <duryea@dartmouth.edu>'
   end

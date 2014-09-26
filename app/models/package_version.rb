@@ -15,6 +15,15 @@ class PackageVersion < ActiveRecord::Base
     latest == 1
   end
 
+  def release!
+    if valid?
+      self.class.clear_package_latest_versions(name)
+      save(validate: false)
+    else
+      fail ActiveRecord::RecordInvalid.new(self)
+    end
+  end
+
   # presetners are better for this case.
   def download_url
     RSyncer::VersionGateway.version_url(name, version)
