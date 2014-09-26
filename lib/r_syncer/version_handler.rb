@@ -1,7 +1,8 @@
 module RSyncer
   # Fetchs the version info and indexes them if not available.
   class VersionHandler
-    attr_accessor :package, :version, :version_gateway, :package_version_mapper
+    attr_accessor :package, :version, :version_gateway,
+      :package_version_mapper, :logger
 
     def self.perform(attributes, options = {})
       new(attributes, options).perform
@@ -10,6 +11,7 @@ module RSyncer
     def initialize(attributes, options = {})
       self.package = attributes.fetch('Package')
       self.version = attributes.fetch('Version')
+      self.logger = options.fetch(:logger) { Rails.logger }
       self.version_gateway = options.fetch(:version_gateway) { VersionGateway }
       self.package_version_mapper =
         options.fetch(:package_version_mapper) { PackageVersionMapper }
@@ -19,7 +21,7 @@ module RSyncer
       return if version_exists?
       package_version.release!
     rescue => e
-      p e
+      logger.info e.message
     end
 
     private
@@ -35,6 +37,7 @@ module RSyncer
     end
 
     def gateway_info
+      logger.info "Fetching new version: #{package} #{version}"
       version_gateway.version(package, version)
     end
   end

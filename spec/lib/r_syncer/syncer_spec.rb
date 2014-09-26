@@ -22,7 +22,8 @@ module RSyncer
 
       it 'handles each version' do
         version_list.each do |version|
-          expect(version_handler).to have_received(:perform).with(version)
+          expect(version_handler)
+          .to have_received(:perform).with(version, logger: syncer.logger)
         end
       end
     end
