@@ -14,18 +14,16 @@ module RSyncer
           max_fetch: max_fetch
         )
       end
+
       before { syncer.perform }
 
-      it 'fetches the versions list' do
-        expect(version_gateway).to have_received(:list).with(max_fetch)
-      end
-
-      it 'handles each version' do
+      it 'handles all listed versions' do
         version_list.each do |version|
           expect(version_handler)
           .to have_received(:perform).with(version, logger: syncer.logger)
         end
       end
+
     end
   end
 end
