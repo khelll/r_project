@@ -21,10 +21,12 @@ module RSyncer
       let(:ver) { '1.1' }
       let(:description) { version_description('ver_desc.txt') }
       let(:version) { described_class.version(name, ver) }
+      
       before do
         stub_request(:get, described_class.version_url(name, ver))
         .to_return(body: fixture_content('ABCp2_1.1.tar.gz'))
       end
+      
       it 'returns a list of parsed values' do
         expect(version['Package']).to eq(description.fetch('Package'))
         expect(version['Version']).to eq(description.fetch('Version'))
@@ -35,6 +37,7 @@ module RSyncer
         expect(version['Date/Publication'].to_s)
         .to eq(description.fetch('Date/Publication'))
       end
+    
     end
   end
 end
