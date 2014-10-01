@@ -1,14 +1,15 @@
 class PackageVersion < ActiveRecord::Base
   scope :latest, -> { where(latest: true) }
   scope :old, -> { where(latest: false) }
-  scope :for_package, -> (name) { where(name: name) }
+  scope :for_package, -> (package_name) { where(package_name: package_name) }
   scope :for_package_and_version,
-    -> (name, version) { for_package(name).where(version: version) }
+    -> (package_name, code) { for_package(package_name).where(code: code) }
 
-  validates :version, uniqueness: { scope: :name, message: 'already exists!' }
+  validates :code,
+    uniqueness: { scope: :package_name, message: 'already exists!' }
 
-  def self.clear_package_latest_versions(package)
-    for_package(package).update_all(latest: 0)
+  def self.clear_package_latest_versions(package_name)
+    for_package(package_name).update_all(latest: 0)
   end
 
   def latest?
@@ -17,7 +18,7 @@ class PackageVersion < ActiveRecord::Base
 
   def release!
     if valid?
-      self.class.clear_package_latest_versions(name)
+      self.class.clear_package_latest_versions(package_name)
       save(validate: false)
     else
       fail ActiveRecord::RecordInvalid.new(self)
@@ -26,6 +27,6 @@ class PackageVersion < ActiveRecord::Base
 
   # presetners are better for this case.
   def download_url
-    RSyncer::VersionGateway.version_url(name, version)
+    RSyncer::VersionGateway.version_url(package_name, code)
   end
 end

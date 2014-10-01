@@ -1,19 +1,19 @@
 # This will guess the package versions class
 FactoryGirl.define do
   factory :package_version do
-    sequence(:version) { |n| "0.#{n}" }
+    sequence(:code) { |n| "0.#{n}" }
     published_at Time.now
-    sequence(:name) { |n| "Name of package #{n}" }
-    sequence(:title) { |n| "Title of package #{n}" }
-    sequence(:description) { |n| "Description of package #{n}" }
+    sequence(:package_name) { |n| "Name of package #{n}" }
+    sequence(:title) { |n| "Title of version #{n}" }
+    sequence(:description) { |n| "Description of version #{n}" }
     authors 'someone <someone@testmail.com>'
     maintainers 'someone2 <someone2@testmail.com>'
   end
 
   factory :tmp_package_version, class: :package_version do
-    version '1.1'
+    code '1.1'
     published_at Time.now
-    name 'ABCp2'
+    package_name 'ABCp2'
     title 'Approximate Bayesian Computational model for estimating P2'
     description 'This package tests the goodness of fit of a distribution of ' \
       'offspring to the Normal, Poisson, and Gamma distribution and ' \

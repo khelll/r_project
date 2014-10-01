@@ -2,7 +2,7 @@ class Package
   attr_accessor :name
 
   def self.latest_versions
-    PackageVersion.latest.order(name: :asc)
+    PackageVersion.latest.order(package_name: :asc)
   end
 
   def self.old_versions
@@ -14,7 +14,7 @@ class Package
   end
 
   def versions
-    PackageVersion.for_package(name).order(version: :desc)
+    PackageVersion.for_package(name).order(code: :desc)
   end
 
   def to_param

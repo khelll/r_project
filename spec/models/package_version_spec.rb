@@ -11,7 +11,7 @@ RSpec.describe PackageVersion, :type => :model do
 
       expect(described_class)
       .to have_received(:clear_package_latest_versions)
-      .with(package_version.name)
+      .with(package_version.package_name)
     end
 
     it 'saves the object' do
@@ -24,7 +24,8 @@ RSpec.describe PackageVersion, :type => :model do
       package_version.save
       new_package_version = FactoryGirl.build(
         :package_version,
-        name: package_version.name, version: package_version.version
+        package_name: package_version.package_name,
+        code: package_version.code
       )
       expect { new_package_version.release! }
       .to raise_error(ActiveRecord::RecordInvalid)

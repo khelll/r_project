@@ -2,8 +2,8 @@ require 'rspec/expectations'
 
 RSpec::Matchers.define :be_a_version do |expected|
   match do |actual|
-    expect(actual.name).to eq(expected.fetch('Package'))
-    expect(actual.version).to eq(expected.fetch('Version'))
+    expect(actual.package_name).to eq(expected.fetch('Package'))
+    expect(actual.code).to eq(expected.fetch('Version'))
     expect(actual.title).to eq(expected.fetch('Title'))
     expect(actual.description).to eq(expected.fetch('Description'))
     expect(actual.authors).to eq(expected.fetch('Author'))

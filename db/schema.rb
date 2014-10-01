@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919163121) do
+ActiveRecord::Schema.define(version: 20141001113624) do
 
   create_table "package_versions", force: true do |t|
-    t.string   "name"
-    t.string   "version"
+    t.string   "package_name"
+    t.string   "code"
     t.datetime "published_at"
     t.text     "title"
     t.text     "description"
@@ -26,6 +26,6 @@ ActiveRecord::Schema.define(version: 20140919163121) do
     t.datetime "updated_at"
   end
 
-  add_index "package_versions", ["name", "version"], name: "index_package_versions_on_name_and_version", unique: true
+  add_index "package_versions", ["package_name", "code"], name: "index_package_versions_on_package_name_and_code", unique: true
 
 end

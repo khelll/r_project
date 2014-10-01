@@ -21,8 +21,8 @@ module RSyncer
 
     def package_version_attributes
       {
-        name: attributes['Package'],
-        version: attributes['Version'],
+        package_name: attributes['Package'],
+        code: attributes['Version'],
         title: attributes['Title'],
         description: attributes['Description'],
         authors: attributes['Author'],

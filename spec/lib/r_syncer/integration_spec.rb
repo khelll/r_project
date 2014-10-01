@@ -35,12 +35,12 @@ module RSyncer
          
           before do
             FactoryGirl.create(
-              :package_version, name: 'ABCp2',
-              version: '0.2', latest: 0
+              :package_version, package_name: 'ABCp2',
+              code: '0.2', latest: 0
             )
             FactoryGirl.create(
-              :package_version, name: 'ABCp2',
-              version: '0.4', latest: 1
+              :package_version, package_name: 'ABCp2',
+              code: '0.4', latest: 1
             )
             syncer.perform
           end
