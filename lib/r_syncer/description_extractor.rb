@@ -37,11 +37,15 @@ module RSyncer
       tar_extract = Gem::Package::TarReader.new(gz)
       tar_extract.rewind
       tar_extract.each do |entry|
-        break(entry.read) if entry.full_name =~ /DESCRIPTION/
+        break(utf8(entry.read)) if entry.full_name =~ /DESCRIPTION/
       end
     ensure
       gz.close
       tar_extract.close
+    end
+
+    def utf8(string)
+      string.force_encoding('ISO-8859-1').encode!('UTF-8')
     end
   end
 end
