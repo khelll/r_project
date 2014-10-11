@@ -19,9 +19,7 @@ module RSyncer
 
     def perform
       return if version_exists?
-      package_version.release!
-    rescue => e
-      logger.info e.message
+      release_version!
     end
 
     private
@@ -30,6 +28,12 @@ module RSyncer
       PackageVersion
       .for_package_and_version(package, version)
       .first.present?
+    end
+
+    def release_version!
+      package_version.release!
+    rescue => e
+      logger.info e.message
     end
 
     def package_version

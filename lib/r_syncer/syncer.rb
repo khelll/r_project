@@ -15,12 +15,14 @@ module RSyncer
     end
 
     def perform
-      versions_list.each do |version|
-        version_handler.perform(version, logger: logger)
-      end
+      versions_list.each { |version| handle_version(version) }
     end
 
     private
+
+    def handle_version(version)
+      version_handler.perform(version, logger: logger)
+    end
 
     def versions_list
       logger.info 'Fetching versions list'
