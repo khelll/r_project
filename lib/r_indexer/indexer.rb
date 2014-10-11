@@ -1,6 +1,6 @@
-module RSyncer
+module RIndexer
   # Syning happens here
-  class Syncer
+  class Indexer
     def self.perform(options = {})
       new(options).perform
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module RSyncer
+module RIndexer
   describe VersionHandler do
     describe '#perform' do
       let(:description) { version_description('ver_desc.txt') }

@@ -1,6 +1,6 @@
 require 'dcf'
 
-module RSyncer
+module RIndexer
   # Graps the available packages/versions info from a web service
   # Based on Gateway design pattern
   # @see http://martinfowler.com/eaaCatalog/gateway.html
@@ -23,7 +23,7 @@ module RSyncer
       def version(package_name, version_code)
         url = version_url(package_name, version_code)
         file_data = HTTP.get(url).to_s
-        description = RSyncer::DescriptionExtractor.perform(file_data)
+        description = RIndexer::DescriptionExtractor.perform(file_data)
         Dcf.parse(description).first
       end
 

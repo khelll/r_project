@@ -27,6 +27,6 @@ class PackageVersion < ActiveRecord::Base
 
   # presetners are better for this case.
   def download_url
-    RSyncer::VersionGateway.version_url(package_name, code)
+    RIndexer::VersionGateway.version_url(package_name, code)
   end
 end

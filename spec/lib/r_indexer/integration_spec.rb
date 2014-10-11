@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-module RSyncer
-  describe Syncer do
+module RIndexer
+  describe Indexer do
     describe '#perform' do
       let(:description) { version_description('ver_desc.txt') }
-      let(:syncer) { described_class.new }
+      let(:indexer) { described_class.new }
       
       before do
         stub_request(:get, VersionGateway.versions_url)
@@ -18,7 +18,7 @@ module RSyncer
           
           before do
             2.times { FactoryGirl.create(:package_version) }
-            syncer.perform
+            indexer.perform
           end
 
           it 'adds the record' do
@@ -42,7 +42,7 @@ module RSyncer
               :package_version, package_name: 'ABCp2',
               code: '0.4', latest: 1
             )
-            syncer.perform
+            indexer.perform
           end
 
           it 'adds the record' do
@@ -70,7 +70,7 @@ module RSyncer
         
         before do
           2.times { FactoryGirl.create(:package_version) }
-          2.times { syncer.perform }
+          2.times { indexer.perform }
         end
 
         subject { PackageVersion.count }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module RSyncer
+module RIndexer
   describe PackageVersionMapper do
     let(:description) { version_description('ver_desc.txt') }
     

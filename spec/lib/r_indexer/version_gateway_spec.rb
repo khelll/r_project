@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module RSyncer
+module RIndexer
   describe VersionGateway do
     describe '#list' do
       let(:response) { fixture_content('versions.txt') }

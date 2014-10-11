@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-module RSyncer
+module RIndexer
   describe DescriptionExtractor do
     describe '#perform' do
       let(:data) { fixture_content('ABCp2_1.1.tar.gz') }
